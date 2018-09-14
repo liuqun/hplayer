@@ -46,7 +46,7 @@ vector<HDevice> getDevicesList(REFGUID category){
                 if (SUCCEEDED(hr))
                 {
                     HDevice dev;
-                    sprintf(dev.name, "%S", var.bstrVal);
+                    snprintf(dev.name, HDEVICE_MAX_DEVICE_NAME_LEN, "%S", var.bstrVal);
                     ret.push_back(dev);
                     //printf("%S\n", var.bstrVal);
                     VariantClear(&var);

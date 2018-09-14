@@ -10,23 +10,12 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE = app
 
-debug{
-TARGET          = hplayerd
-MOC_DIR         = debug/tmp/moc
-RCC_DIR         = debug/tmp/rcc
-UI_DIR          = debug/tmp/ui
-OBJECTS_DIR     = debug/tmp/obj
-DESTDIR         = debug/bin
-}
-
-release{
 TARGET          = hplayer
 MOC_DIR         = release/tmp/moc
 RCC_DIR         = release/tmp/rcc
 UI_DIR          = release/tmp/ui
 OBJECTS_DIR     = release/tmp/obj
 DESTDIR         = release/bin
-}
 
 #PRECOMPILED_HEADER  = src/ui/qtheaders.h
 
@@ -138,21 +127,11 @@ win32 {
             glew32s.lib         \
             libcurl_a.lib
 
-    debug{
-    LIBS += opencv_core341d.lib  \
-            opencv_highgui341d.lib   \
-            opencv_imgcodecs341d.lib \
-            opencv_imgproc341d.lib   \
-            opencv_videoio341d.lib
-    }
-
-    release{
     LIBS += opencv_core341.lib  \
             opencv_highgui341.lib   \
             opencv_imgcodecs341.lib \
             opencv_imgproc341.lib   \
             opencv_videoio341.lib
-    }
 }
 
 unix{

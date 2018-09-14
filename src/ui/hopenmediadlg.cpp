@@ -78,7 +78,7 @@ void HOpenMediaDlg::initUI(){
     tab = new QTabWidget;
     tab->addTab(new FileTab, QIcon(":/image/file.png"), tr("File"));
     tab->addTab(new NetworkTab, QIcon(":/image/network.png"), tr("Network"));
-    tab->addTab(new CaptureTab, QIcon(":/image/capture.png"), tr("Capture"));
+    //tab->addTab(new CaptureTab, QIcon(":/image/capture.png"), tr("Capture"));
 
     tab->setCurrentIndex(DEFAULT_MEDIA_TYPE);
 
