@@ -1,5 +1,7 @@
 # output
 build
+install/x86/hplayer.exe
+install/x86/*.log
 
 # test
 test
