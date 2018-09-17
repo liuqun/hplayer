@@ -69,16 +69,25 @@ HOpenMediaDlg::HOpenMediaDlg(QWidget *parent) : QDialog(parent)
 
 void HOpenMediaDlg::initUI(){
     setWindowTitle(tr("Open media"));
-    setFixedSize(600, 300);
+    setFixedSize(800, 200);
 
     QDialogButtonBox* btns = new QDialogButtonBox(QDialogButtonBox::Open | QDialogButtonBox::Cancel);
     connect(btns, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(btns, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
     tab = new QTabWidget;
+	mNetworkTab = new NetworkTab;
+
+if (0){// TODO: 代码清理, 调试过程中强制改写成员变量media的初始值
+    media.type = MEDIA_TYPE_NETWORK;
+    media.src.assign("rtsp://192.168.1.10/user=admin&password=&channel=1&stream=0.sdp?real_stream");
+}
+    mNetworkTab->edit->setText("192.168.1.10");
+
+    tab->addTab(mNetworkTab, QIcon(":/image/network.png"), tr("Network"));
     tab->addTab(new FileTab, QIcon(":/image/file.png"), tr("File"));
-    tab->addTab(new NetworkTab, QIcon(":/image/network.png"), tr("Network"));
-    //tab->addTab(new CaptureTab, QIcon(":/image/capture.png"), tr("Capture"));
+    const QString &tabNameUSBCamera = tr("USB Camera"); // TODO: 代码清理, 移除USB摄像头问题代码
+    //tab->addTab(new CaptureTab, QIcon(":/image/usb-camera.png"), tabNameUSBCamera);
 
     tab->setCurrentIndex(DEFAULT_MEDIA_TYPE);
 
@@ -107,7 +116,10 @@ void HOpenMediaDlg::accept(){
         NetworkTab* nettab = qobject_cast<NetworkTab*>(tab->currentWidget());
         if (nettab){
             media.type = MEDIA_TYPE_NETWORK;
-            media.src  = qPrintable(nettab->edit->text());
+            media.src.clear();
+            media.src = "rtsp://";
+            media.src += qPrintable(nettab->edit->text());
+            media.src += "/user=admin&password=&channel=1&stream=0.sdp?real_stream";
         }
     }
         break;
@@ -125,4 +137,14 @@ void HOpenMediaDlg::accept(){
     }
 
     QDialog::accept();
+}
+
+const QString &HOpenMediaDlg::changeNetworkCameraIPAddress(const QString &strIP){
+    // 例如 "rtsp://192.168.1.10/user=admin&password=&channel=1&stream=0.sdp?real_stream";
+    mNetworkTab->edit->setText(strIP);
+	media.type = MEDIA_TYPE_NETWORK;
+	media.src = "rtsp://";
+    media.src += qPrintable(strIP);
+    media.src += "/user=admin&password=&channel=1&stream=0.sdp?real_stream";
+	return (strIP);
 }

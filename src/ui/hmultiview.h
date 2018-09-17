@@ -19,10 +19,16 @@
     F(MV_STYLE_49, 7, 7, " MV49", ":/image/style49.png") \
     F(MV_STYLE_64, 8, 8, " MV64",  ":/image/style64.png")
 
-#define ENUM_MV_STYLE(id, row, col, label, image) id,
-
 enum MV_STYLE{
-    FOREACH_MV_STYLE(ENUM_MV_STYLE)
+    MV_STYLE_1,
+    MV_STYLE_2,
+    MV_STYLE_4,
+    MV_STYLE_9,
+    MV_STYLE_16,
+    MV_STYLE_25,
+    MV_STYLE_36,
+    MV_STYLE_49,
+    MV_STYLE_64,
 };
 
 struct HWndInfo{

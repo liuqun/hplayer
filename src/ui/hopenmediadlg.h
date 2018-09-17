@@ -53,6 +53,8 @@ protected:
 public:
     QTabWidget* tab;
     HMedia media;
+    NetworkTab* mNetworkTab;
+    const QString &changeNetworkCameraIPAddress(const QString &strIP);
 };
 
 #endif // HOPENMEDIADLG_H

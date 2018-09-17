@@ -2,6 +2,10 @@
 #include "hvideoplayerfactory.h"
 #include "qtstyles.h"
 
+// 
+static inline QString GetIPAddressFromURL(const char safeURL[]);
+
+
 HVideoWidget::HVideoWidget(QWidget *parent) : QFrame(parent)
 {
     playerid = 0;
@@ -125,7 +129,7 @@ void HVideoWidget::start(){
             SAFE_DELETE(pImpl_player);
             goto end;
         }
-        title = media.src.c_str();
+        title = GetIPAddressFromURL(media.src.c_str());
     }else{
         pImpl_player->resume();
     }
@@ -173,7 +177,14 @@ void HVideoWidget::onTimerUpdate(){
 #include "hopenmediadlg.h"
 void HVideoWidget::onBtnMedia(){
     HOpenMediaDlg dlg(this);
+    if (MEDIA_TYPE_NETWORK == media.type && media.src.length() > 0){
+        dlg.changeNetworkCameraIPAddress(GetIPAddressFromURL(media.src.c_str()));
+    }
     if (dlg.exec() == QDialog::Accepted){
         open(dlg.media);
     }
+}
+
+static inline QString GetIPAddressFromURL(const char safeURL[]){
+    return "192.168.1.10";
 }

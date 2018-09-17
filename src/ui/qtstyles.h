@@ -9,8 +9,8 @@
 #define MULTI_VIEW_FACTOR  100
 
 #define WITH_MV_STYLE   1
-#define MV_STYLE_ROW    3
-#define MV_STYLE_COL    3
+#define MV_STYLE_ROW    1
+#define MV_STYLE_COL    1
 //==============================================
 
 #define DEFAULT_SKIN            ":/skin/dark.qss"

@@ -30,9 +30,9 @@ void HVideoToolbar::initUI(){
     btnPause->hide();
 
     hbox->addSpacing(5);
-    hbox->addWidget(btnPrev);
+    //hbox->addWidget(btnPrev);  // TODO: 代码清理, 移除不需要的屏幕按钮
     hbox->addWidget(btnStop);
-    hbox->addWidget(btnNext);
+    //hbox->addWidget(btnNext);  // TODO: 代码清理, 移除不需要的屏幕按钮
 
     hbox->addStretch();
 
