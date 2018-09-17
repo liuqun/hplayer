@@ -4,11 +4,11 @@
 #define APP_NAME        "hplayer"
 #define APP_VERSION     "1.0"
 
-#define COMPANY_NAME    "ReadSense"
-#define COMPANY_WEBSITE "www.readsense.com"
+#define COMPANY_NAME    "Zhongruidianke"
+#define COMPANY_WEBSITE "https://www.zyhx-group.com"
 
-#define AUTHOR          "ithewei"
-#define PERSON_EMAIL    "ithewei@163.com"
-#define PERSON_WEBSITE  ""
+#define AUTHOR          "Liu Qun"
+#define PERSON_EMAIL    "qunliu@zyhx-group.com"
+#define PERSON_WEBSITE  "https://github.com/liuqun"
 
 #endif // APPDEF_H
