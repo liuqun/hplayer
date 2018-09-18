@@ -96,11 +96,12 @@ const int N = 4;//(const int) (sizeof(items)/sizeof(items[0]));
 
     viewMenu->addSeparator();
 
-    actMvFullscreen = new QAction(tr("Fullscreen F11"));
+    actMvFullscreen = new QAction(QIcon(":/image/fullscreen.png"), tr("Fullscreen F11"), this);
     actMvFullscreen->setCheckable(true);
     actMvFullscreen->setChecked(false);
     connect( actMvFullscreen, &QAction::triggered, this, &MainWindow::mv_fullscreen );
     viewMenu->addAction(actMvFullscreen);
+    viewToolbar->addAction(actMvFullscreen);
 
     // TODO: 清理代码, 移除已废弃 MainWindow::fullscreen, 只保留 MainWindow::mv_fullscreen
     //actFullscreen = new QAction(tr("Fullscreen F12"));
