@@ -49,32 +49,82 @@
 **
 ****************************************************************************/
 
-#ifndef CONSOLE_H
-#define CONSOLE_H
+#include "myplaintextedit.h"
 
-#include <QPlainTextEdit>
+#include <QScrollBar>
 
-class Console : public QPlainTextEdit
+MyPlainTextEdit::MyPlainTextEdit(QWidget *parent) :
+    QPlainTextEdit(parent)
 {
-    Q_OBJECT
+    document()->setMaximumBlockCount(100);
+    QPalette p = palette();
+    p.setColor(QPalette::Base, Qt::black);
+    p.setColor(QPalette::Text, Qt::white);
+    setPalette(p);
+}
 
-signals:
-    void getData(const QByteArray &data);
+void MyPlainTextEdit::putUTF8(const QByteArray &data)
+{
+    insertPlainText(data);
 
-public:
-    explicit Console(QWidget *parent = nullptr);
+    QScrollBar *bar = verticalScrollBar();
+    bar->setValue(bar->maximum());
+}
 
-    void putData(const QByteArray &data);
-    void setLocalEchoEnabled(bool set);
+#include <QTextCodec>
 
-protected:
-    void keyPressEvent(QKeyEvent *e) override;
-    void mousePressEvent(QMouseEvent *e) override;
-    void mouseDoubleClickEvent(QMouseEvent *e) override;
-    void contextMenuEvent(QContextMenuEvent *e) override;
+static QTextCodec *g_codec=QTextCodec::codecForName("GBK");
 
-private:
-    bool m_localEchoEnabled = false;
-};
+inline QByteArray *UTF8FromGBK(const QByteArray& gbk)
+{
+    if (!g_codec) {
+        // error
+        return new QByteArray(gbk);
+    }
+    const QString& unicode = g_codec->toUnicode(gbk);  // TODO: Make sure the input is GBK before we convert it!
+    return (new QByteArray(unicode.toUtf8()));
+}
 
-#endif // CONSOLE_H
+void MyPlainTextEdit::putGBK(const QByteArray &gbk)
+{
+    QByteArray *pUTF8 = UTF8FromGBK(gbk);
+    putUTF8(*pUTF8);
+    delete pUTF8;
+}
+
+void MyPlainTextEdit::setLocalEchoEnabled(bool set)
+{
+    m_localEchoEnabled = set;
+}
+
+void MyPlainTextEdit::keyPressEvent(QKeyEvent *e)
+{
+    switch (e->key()) {
+    case Qt::Key_Backspace:
+    case Qt::Key_Left:
+    case Qt::Key_Right:
+    case Qt::Key_Up:
+    case Qt::Key_Down:
+        break;
+    default:
+        if (m_localEchoEnabled)
+            QPlainTextEdit::keyPressEvent(e);
+        emit getData(e->text().toLocal8Bit());
+    }
+}
+
+void MyPlainTextEdit::mousePressEvent(QMouseEvent *e)
+{
+    Q_UNUSED(e)
+    setFocus();
+}
+
+void MyPlainTextEdit::mouseDoubleClickEvent(QMouseEvent *e)
+{
+    Q_UNUSED(e)
+}
+
+void MyPlainTextEdit::contextMenuEvent(QContextMenuEvent *e)
+{
+    Q_UNUSED(e)
+}

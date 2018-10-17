@@ -65,7 +65,7 @@ class MainWindow;
 
 QT_END_NAMESPACE
 
-class Console;
+class MyPlainTextEdit;
 class SettingsDialog;
 
 class MainWindow : public QMainWindow
@@ -93,7 +93,7 @@ private:
 
     Ui::MainWindow *m_ui = nullptr;
     QLabel *m_status = nullptr;
-    Console *m_console = nullptr;
+    MyPlainTextEdit *m_centralWidget = nullptr;
     SettingsDialog *m_settings = nullptr;
     QSerialPort *m_serial = nullptr;
 };

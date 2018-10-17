@@ -49,61 +49,30 @@
 **
 ****************************************************************************/
 
-#include "console.h"
+#pragma once
 
-#include <QScrollBar>
+#include <QPlainTextEdit>
 
-Console::Console(QWidget *parent) :
-    QPlainTextEdit(parent)
+class MyPlainTextEdit : public QPlainTextEdit
 {
-    document()->setMaximumBlockCount(100);
-    QPalette p = palette();
-    p.setColor(QPalette::Base, Qt::black);
-    p.setColor(QPalette::Text, Qt::green);
-    setPalette(p);
-}
+    Q_OBJECT
 
-void Console::putData(const QByteArray &data)
-{
-    insertPlainText(data);
+signals:
+    void getData(const QByteArray &data);
 
-    QScrollBar *bar = verticalScrollBar();
-    bar->setValue(bar->maximum());
-}
+public:
+    explicit MyPlainTextEdit(QWidget *parent = nullptr);
 
-void Console::setLocalEchoEnabled(bool set)
-{
-    m_localEchoEnabled = set;
-}
+    void putUTF8(const QByteArray &utf8);
+    void putGBK(const QByteArray &gbk);
+    void setLocalEchoEnabled(bool set);
 
-void Console::keyPressEvent(QKeyEvent *e)
-{
-    switch (e->key()) {
-    case Qt::Key_Backspace:
-    case Qt::Key_Left:
-    case Qt::Key_Right:
-    case Qt::Key_Up:
-    case Qt::Key_Down:
-        break;
-    default:
-        if (m_localEchoEnabled)
-            QPlainTextEdit::keyPressEvent(e);
-        emit getData(e->text().toLocal8Bit());
-    }
-}
+protected:
+    void keyPressEvent(QKeyEvent *e) override;
+    void mousePressEvent(QMouseEvent *e) override;
+    void mouseDoubleClickEvent(QMouseEvent *e) override;
+    void contextMenuEvent(QContextMenuEvent *e) override;
 
-void Console::mousePressEvent(QMouseEvent *e)
-{
-    Q_UNUSED(e)
-    setFocus();
-}
-
-void Console::mouseDoubleClickEvent(QMouseEvent *e)
-{
-    Q_UNUSED(e)
-}
-
-void Console::contextMenuEvent(QContextMenuEvent *e)
-{
-    Q_UNUSED(e)
-}
+private:
+    bool m_localEchoEnabled = false;
+};

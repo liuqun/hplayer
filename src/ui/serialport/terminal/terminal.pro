@@ -8,12 +8,12 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     settingsdialog.cpp \
-    console.cpp
+    myplaintextedit.cpp
 
 HEADERS += \
     mainwindow.h \
     settingsdialog.h \
-    console.h
+    myplaintextedit.h
 
 FORMS += \
     mainwindow.ui \

@@ -51,7 +51,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "console.h"
+#include "myplaintextedit.h"
 #include "settingsdialog.h"
 
 #include <QLabel>
@@ -62,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     m_ui(new Ui::MainWindow),
     m_status(new QLabel),
-    m_console(new Console),
+    m_centralWidget(new MyPlainTextEdit),
     m_settings(new SettingsDialog),
 //! [1]
     m_serial(new QSerialPort(this))
@@ -70,8 +70,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 //! [0]
     m_ui->setupUi(this);
-    m_console->setEnabled(false);
-    setCentralWidget(m_console);
+    m_centralWidget->setEnabled(false);
+    setCentralWidget(m_centralWidget);
 
     m_ui->actionConnect->setEnabled(true);
     m_ui->actionDisconnect->setEnabled(false);
@@ -87,7 +87,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //! [2]
     connect(m_serial, &QSerialPort::readyRead, this, &MainWindow::readData);
 //! [2]
-    connect(m_console, &Console::getData, this, &MainWindow::writeData);
+    connect(m_centralWidget, &MyPlainTextEdit::getData, this, &MainWindow::writeData);
 //! [3]
 }
 //! [3]
@@ -109,8 +109,8 @@ void MainWindow::openSerialPort()
     m_serial->setStopBits(p.stopBits);
     m_serial->setFlowControl(p.flowControl);
     if (m_serial->open(QIODevice::ReadWrite)) {
-        m_console->setEnabled(true);
-        m_console->setLocalEchoEnabled(p.localEchoEnabled);
+        //m_console->setEnabled(true);
+        m_centralWidget->setLocalEchoEnabled(p.localEchoEnabled);
         m_ui->actionConnect->setEnabled(false);
         m_ui->actionDisconnect->setEnabled(true);
         m_ui->actionConfigure->setEnabled(false);
@@ -130,7 +130,7 @@ void MainWindow::closeSerialPort()
 {
     if (m_serial->isOpen())
         m_serial->close();
-    m_console->setEnabled(false);
+    m_centralWidget->setEnabled(false);
     m_ui->actionConnect->setEnabled(true);
     m_ui->actionDisconnect->setEnabled(false);
     m_ui->actionConfigure->setEnabled(true);
@@ -153,28 +153,12 @@ void MainWindow::writeData(const QByteArray &data)
 }
 //! [6]
 
-#include <QTextCodec>
-
-static QTextCodec *g_codec=QTextCodec::codecForName("GBK");
-
-inline QByteArray *UTF8FromGBK(const QByteArray& gbk)
-{
-    if (!g_codec) {
-        // error
-        return new QByteArray(gbk);
-    }
-    const QString& unicode = g_codec->toUnicode(gbk);  // TODO: Make sure the input is GBK before we convert it!
-    return (new QByteArray(unicode.toUtf8()));
-}
-
 //! [7]
 void MainWindow::readData()
 {
     const QByteArray data = m_serial->readAll();
-    m_console->clear();
-    QByteArray *utf8 = UTF8FromGBK(data);
-    m_console->putData(*utf8);
-    delete utf8;
+    m_centralWidget->clear();
+    m_centralWidget->putGBK(data);
 }
 //! [7]
 
@@ -194,7 +178,7 @@ void MainWindow::initActionsConnections()
     connect(m_ui->actionDisconnect, &QAction::triggered, this, &MainWindow::closeSerialPort);
     connect(m_ui->actionQuit, &QAction::triggered, this, &MainWindow::close);
     connect(m_ui->actionConfigure, &QAction::triggered, m_settings, &SettingsDialog::show);
-    connect(m_ui->actionClear, &QAction::triggered, m_console, &Console::clear);
+    connect(m_ui->actionClear, &QAction::triggered, m_centralWidget, &MyPlainTextEdit::clear);
     connect(m_ui->actionAbout, &QAction::triggered, this, &MainWindow::about);
     connect(m_ui->actionAboutQt, &QAction::triggered, qApp, &QApplication::aboutQt);
 }
