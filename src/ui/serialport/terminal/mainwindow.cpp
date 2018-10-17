@@ -153,11 +153,28 @@ void MainWindow::writeData(const QByteArray &data)
 }
 //! [6]
 
+#include <QTextCodec>
+
+static QTextCodec *g_codec=QTextCodec::codecForName("GBK");
+
+inline QByteArray *UTF8FromGBK(const QByteArray& gbk)
+{
+    if (!g_codec) {
+        // error
+        return new QByteArray(gbk);
+    }
+    const QString& unicode = g_codec->toUnicode(gbk);  // TODO: Make sure the input is GBK before we convert it!
+    return (new QByteArray(unicode.toUtf8()));
+}
+
 //! [7]
 void MainWindow::readData()
 {
     const QByteArray data = m_serial->readAll();
-    m_console->putData(data);
+    m_console->clear();
+    QByteArray *utf8 = UTF8FromGBK(data);
+    m_console->putData(*utf8);
+    delete utf8;
 }
 //! [7]
 
