@@ -58,6 +58,7 @@ private:
 
     HVideoWnd *videoWnd;
     HVideoTitlebar *titlebar;
+    MyPlainTextEdit *info;
     HVideoToolbar *toolbar;
     QPushButton *btnMedia;
 
