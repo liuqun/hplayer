@@ -185,6 +185,13 @@ void HVideoWidget::onBtnMedia(){
     }
 }
 
+
+#include "appdef.h"
+
 static inline QString GetIPAddressFromURL(const char safeURL[]){
-    return "192.168.1.10";
+    using AppDef::DEBUG;
+    if (DEBUG) {
+        return (safeURL);
+    }
+    return "192.168.1.100";  // TODO: 重新实现函数GetIPAddressFromURL
 }

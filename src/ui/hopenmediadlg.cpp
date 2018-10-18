@@ -1,4 +1,4 @@
-#include "hopenmediadlg.h"
+﻿#include "hopenmediadlg.h"
 #include "hdevice.h"
 
 FileTab::FileTab(QWidget *parent) : QWidget(parent){
@@ -67,6 +67,8 @@ HOpenMediaDlg::HOpenMediaDlg(QWidget *parent) : QDialog(parent)
     initConnect();
 }
 
+#include "appdef.h"
+
 void HOpenMediaDlg::initUI(){
     setWindowTitle(tr("Open media"));
     setFixedSize(800, 200);
@@ -78,11 +80,15 @@ void HOpenMediaDlg::initUI(){
     tab = new QTabWidget;
 	mNetworkTab = new NetworkTab;
 
-if (0){// TODO: 代码清理, 调试过程中强制改写成员变量media的初始值
+using AppDef::DEBUG;
+if (DEBUG){// TODO: 代码清理, 调试过程中强制改写成员变量media的初始值
     media.type = MEDIA_TYPE_NETWORK;
-    media.src.assign("rtsp://192.168.1.10/user=admin&password=&channel=1&stream=0.sdp?real_stream");
+    media.src.assign("rtsp://192.168.1.100/user=admin&password=&channel=1&stream=0.sdp?real_stream");
+    mNetworkTab->edit->setText(media.src.c_str());
 }
-    mNetworkTab->edit->setText("192.168.1.10");
+if (!DEBUG){
+    mNetworkTab->edit->setText("192.168.1.100");  // TODO: 持久化储存初始值
+}
 
     tab->addTab(mNetworkTab, QIcon(":/image/network.png"), tr("Network"));
     tab->addTab(new FileTab, QIcon(":/image/file.png"), tr("File"));
@@ -117,9 +123,15 @@ void HOpenMediaDlg::accept(){
         if (nettab){
             media.type = MEDIA_TYPE_NETWORK;
             media.src.clear();
+            using AppDef::DEBUG;
+            if (DEBUG) {
+                media.src = qPrintable(nettab->edit->text());
+            }
+            if (!DEBUG) {
             media.src = "rtsp://";
             media.src += qPrintable(nettab->edit->text());
             media.src += "/user=admin&password=&channel=1&stream=0.sdp?real_stream";
+            }
         }
     }
         break;
@@ -139,10 +151,18 @@ void HOpenMediaDlg::accept(){
     QDialog::accept();
 }
 
+#include "appdef.h"
+
 const QString &HOpenMediaDlg::changeNetworkCameraIPAddress(const QString &strIP){
     // 例如 "rtsp://192.168.1.10/user=admin&password=&channel=1&stream=0.sdp?real_stream";
     mNetworkTab->edit->setText(strIP);
 	media.type = MEDIA_TYPE_NETWORK;
+
+using AppDef::DEBUG;
+if (DEBUG) {
+    media.src = qPrintable(strIP);
+    return (strIP);
+}
 	media.src = "rtsp://";
     media.src += qPrintable(strIP);
     media.src += "/user=admin&password=&channel=1&stream=0.sdp?real_stream";

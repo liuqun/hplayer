@@ -11,7 +11,8 @@ enum MEDIA_TYPE{
 };
 
 #define DEFAULT_MEDIA_TYPE  MEDIA_TYPE_NETWORK
-const char DEFAULT_MEDIA_SRC[]="rtsp://192.168.1.10/user=admin&password=&channel=1&stream=0.sdp?real_stream";
+#include "appdef.h"
+using AppDef::DEFAULT_MEDIA_SRC;
 
 typedef struct media_s{
     MEDIA_TYPE  type;

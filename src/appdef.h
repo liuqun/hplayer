@@ -11,4 +11,9 @@
 #define PERSON_EMAIL    "qunliu@zyhx-group.com"
 #define PERSON_WEBSITE  "https://github.com/liuqun"
 
+namespace AppDef {
+extern const int DEBUG;
+extern const char DEFAULT_MEDIA_SRC[];
+}
+
 #endif // APPDEF_H

@@ -69,9 +69,6 @@ HEADERS +=  \
     src/video/hmedia.h \
     src/video/opencv_util.h
 
-HEADERS += \
-    src/appdef.h
-
 SOURCES +=  \
     src/ui/centralwidget.cpp \
     src/ui/hmedialist.cpp \
@@ -105,6 +102,9 @@ SOURCES +=  src/win32/hdevice.cpp
 
 HEADERS += src/ui/myplaintextedit.h
 SOURCES += src/ui/myplaintextedit.cpp
+
+HEADERS += src/appdef.h
+SOURCES += src/appdef.cpp
 
 win32 {
     DEFINES += WIN32_LEAN_AND_MEAN GLEW_STATIC CURL_STATICLIB
