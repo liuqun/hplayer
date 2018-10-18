@@ -1,5 +1,6 @@
 #include "centralwidget.h"
 #include "qtstyles.h"
+#include "mysidepanel.h"
 
 CentralWidget::CentralWidget(QWidget *parent) : QWidget(parent)
 {
@@ -14,10 +15,13 @@ CentralWidget::~CentralWidget(){
 void CentralWidget::initUI(){
     ml = new HMediaList;
     mv = new HMultiView;
+    sidePanel = new MySidePanel(this);
+    sidePanel->setEnabled(false);
 
     QSplitter *split = new QSplitter(Qt::Horizontal);
     split->addWidget(ml);
     split->addWidget(mv);
+    split->addWidget(sidePanel);
 
     ml->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     ml->setMinimumWidth(300);

@@ -4,6 +4,7 @@
 #include "qtheaders.h"
 #include "hmedialist.h"
 #include "hmultiview.h"
+#include "MySidePanel.h"
 
 class CentralWidget : public QWidget
 {
@@ -23,6 +24,7 @@ protected:
 public:
     HMediaList* ml;
     HMultiView* mv;
+    MySidePanel *sidePanel;
 };
 
 #endif // CENTRALWIDGET_H

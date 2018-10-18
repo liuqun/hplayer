@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -106,6 +106,9 @@ SOURCES += src/ui/myplaintextedit.cpp
 HEADERS += src/appdef.h
 SOURCES += src/appdef.cpp
 
+HEADERS += src/ui/mysidepanel.h src/ui/myserialportsettingswidget.h
+SOURCES += src/ui/mysidepanel.cpp src/ui/myserialportsettingswidget.cpp
+
 win32 {
     DEFINES += WIN32_LEAN_AND_MEAN GLEW_STATIC CURL_STATICLIB
     INCLUDEPATH += 3rd/include/freetype2/
@@ -139,3 +142,6 @@ win32 {
 
 unix{
 }
+
+FORMS += \
+    src/ui/serialportsettingswidget.ui
