@@ -57,12 +57,6 @@ MyPlainTextEdit::MyPlainTextEdit(QWidget *parent) :
     QPlainTextEdit(parent)
 {
     document()->setMaximumBlockCount(100);
-
-//    // TODO:
-//    QPalette p = palette();
-//    p.setColor(QPalette::Base, Qt::transparent);
-//    p.setColor(QPalette::Text, Qt::white);
-//    setPalette(p);
 }
 
 void MyPlainTextEdit::putUTF8(const QByteArray &data)

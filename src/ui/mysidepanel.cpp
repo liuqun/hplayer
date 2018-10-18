@@ -8,7 +8,6 @@ MySidePanel::MySidePanel(QWidget *parent) :
     QVBoxLayout *vbox = new QVBoxLayout();
     vbox->addWidget(m_settingsWidget, 0, Qt::AlignTop);
     setLayout(vbox);
-    //setText("Debuging... 12345678\nabcdefg\nnnnnnnn");
 }
 
 MySidePanel::~MySidePanel()
