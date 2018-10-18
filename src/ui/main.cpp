@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
     hlogi("%s", get_compile_version());
     qInfo("-------------------app start----------------------------------");
     QApplication a(argc, argv);
-    a.setApplicationName("OCU Remote Control System");
+    a.setApplicationName("ROV Monitor");
 
     setFont(DEFAULT_FONT_SIZE);
     loadSkin(DEFAULT_SKIN);
