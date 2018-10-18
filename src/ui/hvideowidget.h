@@ -6,7 +6,6 @@
 #include "hvideotitlebar.h"
 #include "hvideotoolbar.h"
 #include "hvideoplayer.h"
-#include "myplaintextedit.h"
 
 class  HVideoWidget : public QFrame
 {
@@ -59,7 +58,6 @@ private:
 
     HVideoWnd *videoWnd;
     HVideoTitlebar *titlebar;
-    MyPlainTextEdit *info;
     HVideoToolbar *toolbar;
     QPushButton *btnMedia;
 

@@ -27,22 +27,18 @@ void HVideoWidget::initUI(){
 
     videoWnd = new HVideoWnd(this);
     titlebar = new HVideoTitlebar(this);
-    info = new MyPlainTextEdit(this);
     toolbar  = new HVideoToolbar(this);
     btnMedia = genPushButton(QPixmap(":/image/start.png"), tr("Open media"));
 
     QVBoxLayout *vbox = genVBoxLayout();
 
-    //vbox->addWidget(titlebar, 0, Qt::AlignTop);
-    vbox->addWidget(info, 0, Qt::AlignRight|Qt::AlignTop);
+    vbox->addWidget(titlebar, 0, Qt::AlignTop);
     vbox->addWidget(btnMedia, 0, Qt::AlignCenter);
     vbox->addWidget(toolbar, 0, Qt::AlignBottom);
 
     setLayout(vbox);
 
     titlebar->hide();
-    info->hide();
-    info->setDisabled(true);
     toolbar->hide();
 }
 
@@ -74,15 +70,13 @@ void HVideoWidget::resizeEvent(QResizeEvent *e){
 void HVideoWidget::enterEvent(QEvent *e){
     updateUI();
 
-    //titlebar->show();
-    info->show();
+    titlebar->show();
     toolbar->show();
 }
 
 void HVideoWidget::leaveEvent(QEvent *e){
-    //titlebar->hide();
-    //info->hide();
-    //toolbar->hide();
+    titlebar->hide();
+    toolbar->hide();
 }
 
 void HVideoWidget::mousePressEvent(QMouseEvent *e){
