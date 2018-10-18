@@ -1,3 +1,4 @@
+#include "appdef.h"
 #include "mainwindow.h"
 #include "appdef.h"
 #include "qtstyles.h"
@@ -84,9 +85,12 @@ const int N = 4;//(const int) (sizeof(items)/sizeof(items[0]));
 		actMVS->setToolTip(i->label);
 		smMVS->setMapping(actMVS, i->id);
 		connect( actMVS, SIGNAL(triggered(bool)), smMVS, SLOT(map()) );
+		using AppDef::DEBUG;
+		if (DEBUG) {
 		viewMenu->addAction(actMVS);
 		if (i->row * i->col <= 16) {
 			viewToolbar->addAction(actMVS);
+		}
 		}
 	}
 
