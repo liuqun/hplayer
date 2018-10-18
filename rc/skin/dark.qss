@@ -657,14 +657,12 @@ color:#FF0000;
 .MyPlainTextEdit{
 border:0px solid grey;
 background:transparent;
-font-size:20px;
-font-weight:bold;
 color:white;
 selection-background-color:darkblue;
 selection-color:white;
 }
 .MyPlainTextEdit:focus,.MyPlainTextEdit:hover{
-border:2px solid red;
+border:2px solid yellow;
 background:transparent;
 }
 
