@@ -103,6 +103,9 @@ SOURCES += \
 HEADERS +=  src/win32/hdevice.h
 SOURCES +=  src/win32/hdevice.cpp
 
+HEADERS += src/ui/myplaintextedit.h
+SOURCES += src/ui/myplaintextedit.cpp
+
 win32 {
     DEFINES += WIN32_LEAN_AND_MEAN GLEW_STATIC CURL_STATICLIB
     INCLUDEPATH += 3rd/include/freetype2/
