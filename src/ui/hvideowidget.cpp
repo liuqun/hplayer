@@ -42,6 +42,7 @@ void HVideoWidget::initUI(){
 
     titlebar->hide();
     info->hide();
+    info->setDisabled(true);
     toolbar->hide();
 }
 
@@ -80,8 +81,8 @@ void HVideoWidget::enterEvent(QEvent *e){
 
 void HVideoWidget::leaveEvent(QEvent *e){
     //titlebar->hide();
-    info->hide();
-    toolbar->hide();
+    //info->hide();
+    //toolbar->hide();
 }
 
 void HVideoWidget::mousePressEvent(QMouseEvent *e){
