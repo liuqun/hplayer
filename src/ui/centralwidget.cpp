@@ -16,7 +16,6 @@ void CentralWidget::initUI(){
     ml = new HMediaList;
     mv = new HMultiView;
     sidePanel = new MySidePanel(this);
-    sidePanel->setEnabled(false);
 
     QSplitter *split = new QSplitter(Qt::Horizontal);
     split->addWidget(ml);
