@@ -32,6 +32,11 @@ public:
     Settings settings() const;
 
 private:
+    void fillPortsParameters();
+    void updateAllSettings();
+    void updatePortName();
+    void updateBaudRateValue();
+private:
     Ui::SerialPortSettingsWidget *ui;
     Settings m_currentSettings;
 };
