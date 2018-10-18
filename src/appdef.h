@@ -1,8 +1,8 @@
 #ifndef APPDEF_H
 #define APPDEF_H
 
-#define APP_NAME        "hplayer"
-#define APP_VERSION     "1.0"
+// #define APP_NAME        "hplayer"
+// #define APP_VERSION     "1.0"
 
 #define COMPANY_NAME    "Zhongruidianke"
 #define COMPANY_WEBSITE "https://www.zyhx-group.com"

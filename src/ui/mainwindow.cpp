@@ -218,7 +218,7 @@ void MainWindow::keyPressEvent(QKeyEvent* e){
 }
 
 void MainWindow::about(){
-    QString strAbout = APP_NAME " " APP_VERSION "\n\n";
+    QString strAbout = windowTitle() + "\n\n";
 
     strAbout += tr("Build date");
     strAbout += QString::asprintf(" %s %s\n\n", __DATE__, __TIME__);
