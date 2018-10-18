@@ -371,7 +371,7 @@
     <message>
         <location filename="../../src/ui/hopenmediadlg.cpp" line="34"/>
         <source>URL:</source>
-        <translation>指定网络摄像头IP地址（默认值192.168.1.10）：</translation>
+        <translation>指定网络摄像头IP地址（默认值192.168.1.100）：</translation>
     </message>
 </context>
 </TS>
