@@ -145,6 +145,7 @@ const int N = 4;//(const int) (sizeof(items)/sizeof(items[0]));
 }
 
 void MainWindow::initUI(){
+    setWindowTitle(tr("ROV Monitor v2.0 by OUC"));
     setWindowIcon(QIcon(":/image/icon.png"));
     setBaseSize(MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
     centerWidget(this);
