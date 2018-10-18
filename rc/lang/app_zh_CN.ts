@@ -353,7 +353,7 @@
     <message>
         <location filename="../../src/ui/mainwindow.cpp" line="148"/>
         <source>ROV Monitor v2.0 by OUC</source>
-        <translation type="unfinished"></translation>
+        <translation>海大水下机器人综合监控系统2.0</translation>
     </message>
     <message>
         <location filename="../../src/ui/mainwindow.cpp" line="158"/>
