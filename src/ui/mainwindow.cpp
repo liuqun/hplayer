@@ -96,19 +96,19 @@ const int N = 4;//(const int) (sizeof(items)/sizeof(items[0]));
 
     viewMenu->addSeparator();
 
-    actMvFullscreen = new QAction(QIcon(":/image/fullscreen.png"), tr("Fullscreen F11"), this);
-    actMvFullscreen->setCheckable(true);
-    actMvFullscreen->setChecked(false);
-    connect( actMvFullscreen, &QAction::triggered, this, &MainWindow::mv_fullscreen );
-    viewMenu->addAction(actMvFullscreen);
-    viewToolbar->addAction(actMvFullscreen);
+    //actMvFullscreen = new QAction(QIcon(":/image/fullscreen.png"), tr("Fullscreen F11"), this);
+    //actMvFullscreen->setCheckable(true);
+    //actMvFullscreen->setChecked(false);
+    //connect( actMvFullscreen, &QAction::triggered, this, &MainWindow::mv_fullscreen );
+    //viewMenu->addAction(actMvFullscreen);
+    //viewToolbar->addAction(actMvFullscreen);
 
-    // TODO: 清理代码, 移除已废弃 MainWindow::fullscreen, 只保留 MainWindow::mv_fullscreen
-    //actFullscreen = new QAction(tr("Fullscreen F12"));
-    //actFullscreen->setCheckable(true);
-    //actFullscreen->setChecked(false);
-    //connect( actFullscreen, &QAction::triggered, this, &MainWindow::fullscreen );
-    //viewMenu->addAction(actFullscreen);
+    actFullscreen = new QAction(QIcon(":/image/fullscreen.png"), tr("Fullscreen F11"));
+    actFullscreen->setCheckable(true);
+    actFullscreen->setChecked(false);
+    connect( actFullscreen, &QAction::triggered, this, &MainWindow::fullscreen );
+    viewMenu->addAction(actFullscreen);
+    viewToolbar->addAction(actFullscreen);
 
     actMenubar = new QAction(tr("Menubar F10"));
     actMenubar->setCheckable(true);
@@ -157,39 +157,39 @@ void MainWindow::initConnect(){
     connect(this, SIGNAL(reqPlay(HMedia&)), center->mv, SLOT(play(HMedia&)));
 }
 
-void MainWindow::fullscreen(){ // TODO: 清理代码, 移除已废弃的成员函数 MainWindow::fullscreen()
-//    static QRect rcOld;
-//    if (isFullScreen()){
-//        menuBar()->setVisible(true);
-//        showNormal();
-//        setGeometry(rcOld);
-//        status = NORMAL;
-//    }else{
-//        rcOld = geometry();
-//        menuBar()->setVisible(false);
-//        showFullScreen();
-//        status = FULLSCREEN;
-//    }
-//    actFullscreen->setChecked(isFullScreen());
-//    actMenubar->setChecked(menuBar()->isVisible());
+void MainWindow::fullscreen(){
+    static QRect rcOld;
+    if (isFullScreen()){
+        menuBar()->setVisible(true);
+        showNormal();
+        setGeometry(rcOld);
+        status = NORMAL;
+    }else{
+        rcOld = geometry();
+        menuBar()->setVisible(false);
+        showFullScreen();
+        status = FULLSCREEN;
+    }
+    actFullscreen->setChecked(isFullScreen());
+    actMenubar->setChecked(menuBar()->isVisible());
 }
 
 void MainWindow::mv_fullscreen(){
-    HMultiView* mv = center->mv;
-    if (mv->windowType() & Qt::Window){
-        mv->setWindowFlags(Qt::SubWindow);
-        this->show();
-        status = NORMAL;
-    }else{
-        mv->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-        this->hide();
-        mv->showFullScreen();
-        mv->raise();
-        status = MV_FULLSCREEN;
-    }
-    this->grabKeyboard();
-
-    actMvFullscreen->setChecked(status == MV_FULLSCREEN);
+//    HMultiView* mv = center->mv;
+//    if (mv->windowType() & Qt::Window){
+//        mv->setWindowFlags(Qt::SubWindow);
+//        this->show();
+//        status = NORMAL;
+//    }else{
+//        mv->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+//        this->hide();
+//        mv->showFullScreen();
+//        mv->raise();
+//        status = MV_FULLSCREEN;
+//    }
+//    this->grabKeyboard();
+//
+//    actMvFullscreen->setChecked(status == MV_FULLSCREEN);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent* e){
@@ -204,7 +204,7 @@ void MainWindow::keyPressEvent(QKeyEvent* e){
         }
         /* Fallthough */
     case Qt::Key_F11:
-        mv_fullscreen();
+        fullscreen();
         return;
     default:
         QMainWindow::keyPressEvent(e);
