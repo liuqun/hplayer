@@ -1,6 +1,7 @@
 #include "hvideowidget.h"
 #include "hvideoplayerfactory.h"
 #include "qtstyles.h"
+#include "myplaintextedit.h"
 
 // 
 static inline QString GetIPAddressFromURL(const char safeURL[]);
