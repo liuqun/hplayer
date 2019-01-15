@@ -13,10 +13,14 @@ MySerialPortSettingsWidget::MySerialPortSettingsWidget(QWidget *parent) :
     ui->baudRateBox->setInsertPolicy(QComboBox::NoInsert);
     fillPortsParameters();
     updateAllSettings();
-    ui->dataBitsBox->setEnabled(false);  // FIXME: Editable serial port options is not finished yet
-    ui->parityBox->setEnabled(false); // FIXME: Editable serial port options is not finished yet
-    ui->stopBitsBox->setEnabled(false);  // FIXME: Editable serial port options is not finished yet
-    ui->flowControlBox->setEnabled(false);  // FIXME: Editable serial port options is not finished yet
+    ui->dataBitsBox->setVisible(false);
+    ui->dataBitsBox->setEnabled(false);
+    ui->parityBox->setVisible(false);
+    ui->parityBox->setEnabled(false);
+    ui->stopBitsBox->setVisible(false);
+    ui->stopBitsBox->setEnabled(false);
+    ui->flowControlBox->setVisible(false);
+    ui->flowControlBox->setEnabled(false);
 
     connect(ui->serialPortInfoListBox,
             QOverload<int>::of(&QComboBox::currentIndexChanged),
