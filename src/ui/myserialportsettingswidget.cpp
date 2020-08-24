@@ -13,14 +13,15 @@ MySerialPortSettingsWidget::MySerialPortSettingsWidget(QWidget *parent) :
     ui->baudRateBox->setInsertPolicy(QComboBox::NoInsert);
     fillPortsParameters();
     updateAllSettings();
-    ui->dataBitsBox->setVisible(false);
-    ui->dataBitsBox->setEnabled(false);
-    ui->parityBox->setVisible(false);
-    ui->parityBox->setEnabled(false);
-    ui->stopBitsBox->setVisible(false);
-    ui->stopBitsBox->setEnabled(false);
-    ui->flowControlBox->setVisible(false);
-    ui->flowControlBox->setEnabled(false);
+    //锁定或允许修改下列串口参数
+    //ui->dataBitsBox->setVisible(true);
+    //ui->dataBitsBox->setEnabled(false);
+    //ui->parityBox->setVisible(true);
+    //ui->parityBox->setEnabled(false);
+    //ui->stopBitsBox->setVisible(true);
+    //ui->stopBitsBox->setEnabled(false);
+    //ui->flowControlBox->setVisible(true);
+    //ui->flowControlBox->setEnabled(false);
 
     connect(ui->serialPortInfoListBox,
             QOverload<int>::of(&QComboBox::currentIndexChanged),
